@@ -1,32 +1,71 @@
-# Solar System Simulator
+# Solar System — Premium Simulator
 
-A responsive, interactive Solar System simulator built with HTML, CSS, JavaScript and Three.js. It includes an animated WebGL2 scene, an animated 2D fallback, real-time orbital telemetry, planet profiles, a 2,400-instance asteroid belt, layered star/nebula/galaxy backgrounds, touch camera controls, animation controls and asynchronously loaded planet maps.
+An interactive Solar System explorer built with Three.js, HTML, CSS, and vanilla JavaScript. The site runs as a static project, includes an animated 2D view for browsers without WebGL2, and is designed to adapt from Android phones to desktop screens.
 
-## Run locally
+**GitHub Pages demo:** [mcasas25090-a11y.github.io/-solar-system-web](https://mcasas25090-a11y.github.io/-solar-system-web/)
 
-Because the site uses ES modules, serve the files over HTTP rather than opening `file://`. No build step or backend is required. For example, with Node.js installed:
+## Features
+
+- Three.js WebGL2 scene with three depth layers of stars, procedural nebulae, a distant spiral galaxy, and slowly drifting dust.
+- Eight orbiting planets with 2K Solar System Scope map textures. Generated canvas maps remain in place if a remote map fails; maps are resized on smaller screens to limit GPU memory.
+- Earth cloud and atmosphere layers, Venus cloud layer, Saturn's mapped rings, and Uranus's subtle rings.
+- Glowing, rotating Sun with animated flare sprites and layered corona glow.
+- 2,400 individually varied asteroids rendered in one instanced mesh between the Mars and Jupiter orbits.
+- Kepler-style elliptical orbit animation and live telemetry for selected planet distance, orbital progress, heliocentric position, calculated orbital speed, elapsed simulation time, and simulation speed.
+- Planet cards with diameter, mass, gravity, mean temperature, mean solar distance, orbital period, rotation period, major atmospheric components, and NASA-reported confirmed moon count.
+- WebGL2 capability and context-loss handling. When 3D cannot run, an animated SVG Solar System retains planet selection, planet details, telemetry, pause/speed/orbit controls, and drag/pinch navigation.
+- Responsive layout, smooth camera easing, pointer-based drag and pinch controls, pause/resume, orbit visibility, a 0–5× speed slider, and camera reset.
+
+Planet and Sun textures load from the Solar System Scope public texture host. Internet access is required for Three.js, fonts, and high-resolution maps; procedural maps allow the scene to continue when an image request fails.
+
+## Technologies
+
+- HTML5 and CSS3
+- Vanilla JavaScript ES modules
+- Three.js r166.1 via jsDelivr CDN and an HTML import map
+- SVG and Canvas 2D for generated visuals and the WebGL fallback
+
+## Project structure
+
+```text
+.
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── main.js
+└── README.md
+```
+
+## Install and run locally
+
+No package installation or build step is required. Serve this directory over HTTP because the browser loads JavaScript modules. With Node.js installed, run:
 
 ```sh
 npx serve .
 ```
 
-Open the local URL printed by the server. Any static file server works; Python is not required.
-
-## GitHub Pages
-
-Commit `index.html`, `css/` and `js/` to your repository. In **Settings → Pages**, select the branch and `/ (root)` folder. Relative asset paths support project subpaths.
-
-Three.js, planet textures and Google Fonts load from CDNs, so visitors need an internet connection. If a planet-map request fails, its procedural texture is kept. If WebGL2 is unavailable or its context is lost, the simulator switches to its animated 2D view.
+Open the local address printed by the server. Any static HTTP server can be used; Python and a backend are not required.
 
 ## Controls
 
-- Drag to rotate the 3D camera; scroll or pinch to zoom. In the 2D fallback, drag rotates the view and wheel or pinch zooms.
-- Click a planet or use the planet shortcuts to view its profile and live orbit telemetry.
-- Use the play button, orbit toggle and 0–5× speed slider to control the simulation.
-- Select **Reset view** to restore the camera and Sun selection.
+- Drag in the scene to rotate the camera; scroll or pinch to zoom. The 2D fallback supports drag-to-rotate and wheel/pinch zoom.
+- Select a planet by clicking its visible globe or tapping a planet shortcut. The profile card and live telemetry update to that planet.
+- Use the **play** button to pause or resume orbital motion and asteroid movement.
+- Use **Orbits** to toggle the planetary orbit guides.
+- Set simulation speed from **0× to 5×** in 0.1× steps.
+- Use **Reset view** to ease the 3D camera back to its starting view and select the Sun.
 
-## Data and texture credits
+## Mobile compatibility
 
-Planet diameter, mass, surface gravity, mean temperature, mean solar distance, orbital velocity, and confirmed moon counts are based on NASA's [Planetary Fact Sheet](https://nssdc.gsfc.nasa.gov/planetary/factsheet/). Mean temperature for the giant planets refers to the one-bar level; confirmed moon counts can change as new moons are confirmed. Atmospheric compositions are approximate major components.
+The renderer uses WebGL2 with antialiasing disabled, a capped device pixel ratio, mobile-sized texture maps, instanced asteroids, and batched orbit lines. If WebGL2 is unavailable or the context is lost, the page switches to its SVG-based 2D simulator. Android Chrome requires an internet connection for the CDN modules and optional maps.
 
-Planet and Sun texture maps are from [Solar System Scope](https://www.solarsystemscope.com/textures/), licensed under CC BY 4.0. The page links to that source; texture requests use its public download host and retain locally generated surfaces if a request fails.
+## Data and credits
+
+Planetary diameters, masses, equatorial gravity, mean temperatures, mean Sun distances, orbital values, and confirmed moon counts are based on NASA's [Planetary Fact Sheet](https://nssdc.gsfc.nasa.gov/planetary/factsheet/) and its [definitions and notes](https://nssdc.gsfc.nasa.gov/planetary/factsheet/planetfact_notes.html). For giant planets, the fact sheet gives mean temperature at the 1-bar level. Moon counts are confirmed counts from that sheet and can change as new moons are confirmed. Atmospheric values are approximate major components; Mercury's is an exosphere.
+
+Planet and Sun texture maps are provided by [Solar System Scope](https://www.solarsystemscope.com/textures/) under the **Creative Commons Attribution 4.0 International (CC BY 4.0)** license. The NASA references are used for factual data; generated nebulae, starfields, fallback maps, and SVG illustrations are created by the project.
+
+## Verification note
+
+The project has JavaScript syntax and Node-based checks for orbital calculations, fallback SVG generation, data coverage, and control event wiring. Rendering, visual layout, CDN CORS behavior, and touch performance still need testing in current desktop browsers and on Android Chrome.

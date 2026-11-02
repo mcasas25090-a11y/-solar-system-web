@@ -20,3 +20,4 @@
 .solar-fallback .fb-flare{fill:#ffba57;opacity:.48;filter:url(#fbGlow);transform-box:fill-box;transform-origin:center;animation:fb-flare-pulse 2.8s ease-in-out infinite alternate}@keyframes fb-flare-pulse{from{opacity:.18;transform:scale(.72)}to{opacity:.7;transform:scale(1.14)}}.solar-fallback .fb-asteroid{fill:#b5ad9e;opacity:.5}
 .planet-note{margin:9px 0 0;color:#85849b;font:7px/1.5 var(--mono)}
 .scene-frame.is-paused .solar-fallback .fb-flare{animation-play-state:paused}
+@media(max-width:700px){.scene-frame.planet-selected .scene-label{display:none}}
