@@ -38,13 +38,31 @@
           <button id="closeCard" class="close-card" aria-label="Close planet details">×</button>
           <p class="eyebrow"><i></i> PLANET PROFILE</p><h3 id="planetName">Earth</h3><p id="planetTagline" class="planet-tagline"></p>
           <p id="planetDescription" class="planet-description"></p>
-          <div class="planet-stats"><div><span>DIAMETER</span><strong id="planetDiameter"></strong></div><div><span>ORBIT PERIOD</span><strong id="planetYear"></strong></div></div>
+          <div class="planet-facts" id="planetFacts">
+            <div><span>DIAMETER</span><strong id="planetDiameter"></strong></div><div><span>MASS</span><strong id="planetMass"></strong></div>
+            <div><span>GRAVITY</span><strong id="planetGravity"></strong></div><div><span>MEAN TEMP.</span><strong id="planetTemperature"></strong></div>
+            <div><span>MEAN SUN DIST.</span><strong id="planetDistance"></strong></div><div><span>ORBIT PERIOD</span><strong id="planetYear"></strong></div>
+            <div><span>ROTATION</span><strong id="planetRotation"></strong></div><div><span>KNOWN MOONS</span><strong id="planetMoons"></strong></div>
+            <div class="wide-fact"><span>ATMOSPHERE</span><strong id="planetAtmosphere"></strong></div>
+          </div>
+          <p class="planet-note">Mean temperatures for giant planets are measured near the 1-bar pressure level. Confirmed moon counts may change.</p>
           <button class="next-planet" id="nextPlanet">Explore next <span>→</span></button>
         </aside>
         <div class="hint-pill" id="hintPill">✦ &nbsp; Select a planet to discover more</div>
         <div class="loading" id="loading"><b></b> Mapping the cosmos</div>
         <div class="error-message" id="errorMessage" hidden>3D graphics are unavailable here. Explore the 2D Solar System below.</div>
       </div>
+      <section class="telemetry-panel" aria-label="Live orbital information">
+        <div class="telemetry-heading"><div><p class="eyebrow"><i></i> LIVE SIMULATION</p><h2 id="telemetryTitle">Orbital telemetry</h2></div><span class="telemetry-live"><i></i> UPDATING</span></div>
+        <div class="telemetry-grid">
+          <div><span>SIMULATED DISTANCE</span><strong id="liveDistance">Select a planet</strong></div>
+          <div><span>ORBIT PROGRESS</span><strong id="liveProgress">—</strong><div class="progress-track"><i id="progressBar"></i></div></div>
+          <div><span>ORBIT POSITION</span><strong id="livePosition">—</strong></div>
+          <div><span>ORBITAL SPEED</span><strong id="liveVelocity">—</strong></div>
+          <div><span>SIMULATION TIME</span><strong id="liveTime">0 d</strong></div>
+          <div><span>TIME SCALE</span><strong id="liveSpeed">1.0×</strong></div>
+        </div>
+      </section>
       <section class="control-dock" aria-label="Solar System controls">
         <div class="control-row">
           <div class="transport-controls"><button class="control-button play-button" id="playPause" aria-label="Pause animation" title="Pause / resume"><span id="playIcon">Ⅱ</span></button><button class="control-button orbit-toggle active" id="orbitToggle" aria-pressed="true"><span class="orbit-icon">◎</span><span>Orbits</span></button></div>
