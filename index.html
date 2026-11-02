@@ -31,6 +31,7 @@
       <div class="explorer-heading"><div><p class="eyebrow"><i></i> THE NEIGHBORHOOD</p><h2 id="explorer-title">Explore the planets</h2></div><p class="scene-caption">DRAG TO ROTATE <span>·</span> PINCH TO ZOOM</p></div>
       <div class="scene-frame">
         <div id="space" aria-label="Interactive 3D model of the Solar System"></div>
+        <div id="solarFallback" class="solar-fallback" aria-label="2D Solar System illustration" hidden></div>
         <div class="scene-wash" aria-hidden="true"></div>
         <div class="scene-label"><i></i><span id="sceneName">THE SUN</span><small id="sceneDistance">CENTER OF OUR SOLAR SYSTEM</small></div>
         <aside class="planet-card" id="planetCard" aria-live="polite" aria-hidden="true">
@@ -42,7 +43,7 @@
         </aside>
         <div class="hint-pill" id="hintPill">✦ &nbsp; Select a planet to discover more</div>
         <div class="loading" id="loading"><b></b> Mapping the cosmos</div>
-        <div class="error-message" id="errorMessage" hidden>3D view could not load. Check your internet connection and reload.</div>
+        <div class="error-message" id="errorMessage" hidden>3D graphics are unavailable here. Explore the 2D Solar System below.</div>
       </div>
       <section class="control-dock" aria-label="Solar System controls">
         <div class="control-row">
