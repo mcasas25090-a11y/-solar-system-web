@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050711">
+  <meta name="description" content="Explore the Solar System in an interactive 3D experience.">
+  <title>Solar System — A Cosmic Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js"}}</script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./"><span class="brand-mark">✳</span><span>SOLAR<span class="brand-light">SYSTEM</span></span></a>
+      <div class="top-note"><i></i> AN INTERACTIVE JOURNEY</div>
+      <button class="reset-button" id="resetCamera" title="Reset camera" aria-label="Reset camera">↺ <span>Reset view</span></button>
+    </header>
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-copy-wrap">
+        <p class="eyebrow"><i></i> OUR COSMIC NEIGHBORHOOD</p>
+        <h1 id="page-title">The Solar<br><em>System</em></h1>
+        <p class="intro-copy">Eight planets. One star. A universe of wonder waiting to be explored.</p>
+      </div>
+      <div class="intro-aside"><span class="orbit-art" aria-hidden="true"><i></i><b></b></span><p>YOUR JOURNEY<br>STARTS HERE</p><span>SCROLL TO EXPLORE ↓</span></div>
+    </section>
+    <section class="explorer" aria-labelledby="explorer-title">
+      <div class="explorer-heading"><div><p class="eyebrow"><i></i> THE NEIGHBORHOOD</p><h2 id="explorer-title">Explore the planets</h2></div><p class="scene-caption">DRAG TO ROTATE <span>·</span> PINCH TO ZOOM</p></div>
+      <div class="scene-frame">
+        <div id="space" aria-label="Interactive 3D model of the Solar System"></div>
+        <div class="scene-wash" aria-hidden="true"></div>
+        <div class="scene-label"><i></i><span id="sceneName">THE SUN</span><small id="sceneDistance">CENTER OF OUR SOLAR SYSTEM</small></div>
+        <aside class="planet-card" id="planetCard" aria-live="polite" aria-hidden="true">
+          <button id="closeCard" class="close-card" aria-label="Close planet details">×</button>
+          <p class="eyebrow"><i></i> PLANET PROFILE</p><h3 id="planetName">Earth</h3><p id="planetTagline" class="planet-tagline"></p>
+          <p id="planetDescription" class="planet-description"></p>
+          <div class="planet-stats"><div><span>DIAMETER</span><strong id="planetDiameter"></strong></div><div><span>ORBIT PERIOD</span><strong id="planetYear"></strong></div></div>
+          <button class="next-planet" id="nextPlanet">Explore next <span>→</span></button>
+        </aside>
+        <div class="hint-pill" id="hintPill">✦ &nbsp; Select a planet to discover more</div>
+        <div class="loading" id="loading"><b></b> Mapping the cosmos</div>
+        <div class="error-message" id="errorMessage" hidden>3D view could not load. Check your internet connection and reload.</div>
+      </div>
+      <section class="control-dock" aria-label="Solar System controls">
+        <div class="control-row">
+          <div class="transport-controls"><button class="control-button play-button" id="playPause" aria-label="Pause animation" title="Pause / resume"><span id="playIcon">Ⅱ</span></button><button class="control-button orbit-toggle active" id="orbitToggle" aria-pressed="true"><span class="orbit-icon">◎</span><span>Orbits</span></button></div>
+          <div class="speed-control"><label for="speedRange">SPEED</label><input id="speedRange" type="range" min="0" max="3" step="0.1" value="1"><span id="speedValue">1.0×</span></div>
+          <button class="reset-inline" id="resetCameraSmall" aria-label="Reset camera">↺ <span>Reset view</span></button>
+        </div>
+        <div class="planet-shortcuts" aria-label="Select a planet">
+          <button class="planet-chip sun-chip selected" data-body="Sun"><i></i><span>Sun</span></button><button class="planet-chip" data-body="Mercury"><i></i><span>Mercury</span></button><button class="planet-chip" data-body="Venus"><i></i><span>Venus</span></button><button class="planet-chip" data-body="Earth"><i></i><span>Earth</span></button><button class="planet-chip" data-body="Mars"><i></i><span>Mars</span></button><button class="planet-chip" data-body="Jupiter"><i></i><span>Jupiter</span></button><button class="planet-chip" data-body="Saturn"><i></i><span>Saturn</span></button><button class="planet-chip" data-body="Uranus"><i></i><span>Uranus</span></button><button class="planet-chip" data-body="Neptune"><i></i><span>Neptune</span></button>
+        </div>
+        <div class="dock-footer"><span><kbd>DRAG</kbd> rotate &nbsp; <kbd>SCROLL</kbd> zoom</span><span>☼ &nbsp; DISTANCES &amp; SIZES NOT TO SCALE</span></div>
+      </section>
+    </section>
+    <footer class="page-footer"><span>MADE FOR THE CURIOUS</span><span>OUR SUN · EIGHT PLANETS · INFINITE DISCOVERY</span></footer>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
