@@ -1,3 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050711">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Explore the Solar System in an interactive 3D experience: eight planets, live orbital telemetry and a 2D fallback for any device.">
+  <title>Solar System — A Cosmic Explorer</title>
+
+  <!-- Open Graph (al compartir el enlace) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Solar System — A Cosmic Explorer">
+  <meta property="og:description" content="Eight planets. One star. Explore the Solar System in an interactive 3D experience.">
+
+  <!-- Icono de pestaña (SVG incrustado, sin archivos extra) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='38%25' cy='34%25'%3E%3Cstop offset='0' stop-color='%23fff3b5'/%3E%3Cstop offset='.55' stop-color='%23ffb744'/%3E%3Cstop offset='1' stop-color='%23ed672b'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%23070915'/%3E%3Cellipse cx='32' cy='32' rx='27' ry='10' fill='none' stroke='%23c4a2fa' stroke-opacity='.7' stroke-width='2' transform='rotate(-24 32 32)'/%3E%3Ccircle cx='32' cy='32' r='12' fill='url(%23g)'/%3E%3Ccircle cx='55' cy='24' r='3.5' fill='%238da5ff'/%3E%3C/svg%3E">
+
+  <!-- Conexiones tempranas: fuentes, three.js y texturas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://tea.solarsystemscope.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- El importmap debe ir ANTES de cualquier módulo o modulepreload -->
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js"}}</script>
+  <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js" crossorigin>
+  <link rel="modulepreload" href="js/main.js">
+
+  <noscript><style>.loading,.hint-pill{display:none}</style></noscript>
+</head>
+<body>
+  <main class="app-shell">
+
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Solar System, home"><span class="brand-mark" aria-hidden="true">✳</span><span>SOLAR<span class="brand-light">SYSTEM</span></span></a>
+      <div class="top-note"><i aria-hidden="true"></i> AN INTERACTIVE JOURNEY</div>
+      <button type="button" class="reset-button" id="resetCamera" title="Reset camera" aria-label="Reset camera">↺ <span>Reset view</span></button>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-copy-wrap">
+        <p class="eyebrow"><i aria-hidden="true"></i> OUR COSMIC NEIGHBORHOOD</p>
+        <h1 id="page-title">The Solar<br><em>System</em></h1>
+        <p class="intro-copy">Eight planets. One star. A universe of wonder waiting to be explored.</p>
+      </div>
+      <div class="intro-aside" aria-hidden="true">
+        <span class="orbit-art"><i></i><b></b></span>
+        <p>YOUR JOURNEY<br>STARTS HERE</p>
+        <span>SCROLL TO EXPLORE ↓</span>
+      </div>
+    </section>
+
+    <section class="explorer" aria-labelledby="explorer-title">
+      <div class="explorer-heading">
+        <div>
+          <p class="eyebrow"><i aria-hidden="true"></i> THE NEIGHBORHOOD</p>
+          <h2 id="explorer-title">Explore the planets</h2>
+        </div>
+        <p class="scene-caption">DRAG TO ROTATE <span>·</span> PINCH TO ZOOM</p>
+      </div>
+
+      <div class="scene-frame">
+        <div id="space" role="img" aria-label="Interactive 3D model of the Solar System"></div>
+        <div id="solarFallback" class="solar-fallback" aria-label="2D Solar System illustration" hidden></div>
+        <div class="scene-wash" aria-hidden="true"></div>
+        <div class="scene-label"><i aria-hidden="true"></i><span id="sceneName">THE SUN</span><small id="sceneDistance">CENTER OF OUR SOLAR SYSTEM</small></div>
+
+        <aside class="planet-card" id="planetCard" aria-live="polite" aria-hidden="true">
+          <button type="button" id="closeCard" class="close-card" aria-label="Close planet details">×</button>
+          <p class="eyebrow"><i aria-hidden="true"></i> PLANET PROFILE</p>
+          <h3 id="planetName">Earth</h3>
+          <p id="planetTagline" class="planet-tagline"></p>
+          <p id="planetDescription" class="planet-description"></p>
+          <div class="planet-facts" id="planetFacts">
+            <div><span>DIAMETER</span><strong id="planetDiameter"></strong></div>
+            <div><span>MASS</span><strong id="planetMass"></strong></div>
+            <div><span>GRAVITY</span><strong id="planetGravity"></strong></div>
+            <div><span>MEAN TEMP.</span><strong id="planetTemperature"></strong></div>
+            <div><span>MEAN SUN DIST.</span><strong id="planetDistance"></strong></div>
+            <div><span>ORBIT PERIOD</span><strong id="planetYear"></strong></div>
+            <div><span>ROTATION</span><strong id="planetRotation"></strong></div>
+            <div><span>KNOWN MOONS</span><strong id="planetMoons"></strong></div>
+            <div class="wide-fact"><span>ATMOSPHERE</span><strong id="planetAtmosphere"></strong></div>
+          </div>
+          <p class="planet-note">Mean temperatures for giant planets are measured near the 1-bar pressure level. Confirmed moon counts may change.</p>
+          <button type="button" class="next-planet" id="nextPlanet">Explore next <span aria-hidden="true">→</span></button>
+        </aside>
+
+        <div class="hint-pill" id="hintPill">✦ &nbsp; Select a planet to discover more</div>
+        <div class="loading" id="loading" role="status"><b aria-hidden="true"></b> Mapping the cosmos</div>
+        <div class="error-message" id="errorMessage" role="alert" hidden>3D graphics are unavailable here. Explore the 2D Solar System below.</div>
+        <noscript><div class="error-message">This experience needs JavaScript. Please enable it to explore the Solar System.</div></noscript>
+      </div>
+
+      <section class="telemetry-panel" aria-label="Live orbital information">
+        <div class="telemetry-heading">
+          <div>
+            <p class="eyebrow"><i aria-hidden="true"></i> LIVE SIMULATION</p>
+            <h2 id="telemetryTitle">Orbital telemetry</h2>
+          </div>
+          <span class="telemetry-live" aria-hidden="true"><i></i> UPDATING</span>
+        </div>
+        <div class="telemetry-grid">
+          <div><span>SIMULATED DISTANCE</span><strong id="liveDistance">Select a planet</strong></div>
+          <div><span>ORBIT PROGRESS</span><strong id="liveProgress">—</strong><div class="progress-track"><i id="progressBar"></i></div></div>
+          <div><span>ORBIT POSITION</span><strong id="livePosition">—</strong></div>
+          <div><span>ORBITAL SPEED</span><strong id="liveVelocity">—</strong></div>
+          <div><span>SIMULATION TIME</span><strong id="liveTime">0 d</strong></div>
+          <div><span>TIME SCALE</span><strong id="liveSpeed">1.0×</strong></div>
+        </div>
+      </section>
+
+      <section class="control-dock" aria-label="Solar System controls">
+        <div class="control-row">
+          <div class="transport-controls">
+            <button type="button" class="control-button play-button" id="playPause" aria-label="Pause animation" title="Pause / resume"><span id="playIcon">Ⅱ</span></button>
+            <button type="button" class="control-button orbit-toggle active" id="orbitToggle" aria-pressed="true" title="Show / hide orbits"><span class="orbit-icon" aria-hidden="true">◎</span><span>Orbits</span></button>
+          </div>
+          <div class="speed-control">
+            <label for="speedRange">SPEED</label>
             <input id="speedRange" type="range" min="0" max="5" step="0.1" value="1">
             <span id="speedValue">1.0×</span>
           </div>
